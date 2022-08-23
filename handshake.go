@@ -4,10 +4,10 @@ import (
 	"strings"
 )
 
-// Capabilties (status code 100) messages are used to inform APT of a transport
+// Capabilities (status code 100) messages are used to inform APT of a transport
 // method's feature set.
 //
-// Displays the capabilties of the transport method. Methods should set the
+// Displays the capabilities of the transport method. Methods should set the
 // pipeline bit if their underlying protocol supports pipelining. The only
 // known built-in method that does support pipelining is http(s).
 type Capabilities struct {

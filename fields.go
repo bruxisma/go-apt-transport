@@ -32,12 +32,13 @@ var (
 	timeType = reflect.TypeOf(time.Time{})
 )
 
-// Fields represents the key-value pairs in a Message.
+// Fields represents the key-value pairs in a [Message].
 //
-// The keys should use a canonical form, as returned by CanonicalFieldKey.
+// The keys should use a canonical form, as returned by
+// [transport.CanonicalFieldKey].
 //
-// This type closely matches the textproto.MIMEfields found in "net/textproto"
-// and fields found in "net/http".
+// This type closely matches the [textproto.MIMEfields] and [net/http.Header]
+// types.
 type Fields map[string][]string
 
 type FieldMarshaler interface {
@@ -56,21 +57,21 @@ type FieldUnmarshaler interface {
 // Add adds the key, value pair to the fields.
 //
 // It appends to any existing values associated with key. The key is
-// case-insensitive; it is canonicalized by CanonicalFieldsKey.
+// case-insensitive; it is canonicalized by [transport.CanonicalFieldsKey].
 func (fields Fields) Add(key, value string) {
 	textproto.MIMEHeader(fields).Add(key, value)
 }
 
 // Del deletes  the value associated  with key. The key is case insensitive. It
-// is canonicalized by CanonicalFieldsKey.
+// is canonicalized by [transport.CanonicalFieldsKey].
 func (fields Fields) Del(key string) {
 	textproto.MIMEHeader(fields).Del(key)
 }
 
 // Set sets the field entries associated with key to the single element value.
 // It replaces any  existing values associated with key. The key is case
-// insensitive. It is canonicalized by CanonicalFieldsKey. To use non-canonical
-// keys, assign to the Fields instance directly.
+// insensitive. It is canonicalized by [transport.CanonicalFieldsKey]. To use
+// non-canonical keys, assign to the [Fields] instance directly.
 func (fields Fields) Set(key, value string) {
 	textproto.MIMEHeader(fields).Set(key, value)
 }
@@ -78,23 +79,25 @@ func (fields Fields) Set(key, value string) {
 // Get gets the first value associated with  the given key. If there are no
 // values associated with the key, Get returns "".
 //
-// The key is case insensitive; it is canonicalized by CanonicalFieldsKey. To
-// use non-canonical keys, use the Fields instance directly.
+// The key is case insensitive; it is canonicalized by
+// [transport.CanonicalFieldsKey]. To use non-canonical keys, use the [Fields]
+// instance directly.
 func (fields Fields) Get(key string) string {
 	return textproto.MIMEHeader(fields).Get(key)
 }
 
 // Values returns all values associated with the given key.
 //
-// It is case insensitive; it is canonicalized by CanonicalFieldsKey. To use
-// non-canonical keys, access the map directly.
+// It is case insensitive; it is canonicalized by
+// [transport.CanonicalFieldsKey]. To use non-canonical keys, access the map
+// directly.
 //
 // The slice returned is NOT a copy.
 func (fields Fields) Values(key string) []string {
 	return textproto.MIMEHeader(fields).Values(key)
 }
 
-// Write writes the Fields as though it were a MIME fields. However, it does
+// Write writes the [Fields] as though it were a MIME fields. However, it does
 // not add the trailing newline.
 //
 // This function performs the write all at once, but does allocate internally.

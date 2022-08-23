@@ -29,10 +29,11 @@ type Method struct {
 	Handler      Handler
 }
 
-// WithCapabilities sets the capabilities of the Method.
+// WithCapabilities sets the [transport.Capabilities] of the [Method].
 //
-// NOTE: The SendConfig and Version fields are always overwritten to be true,
-// and the version that was passed in to the call to NewMethod.
+// NOTE: [transport.Capabilities.SendConfig] is always over-written to be true,
+// and [transport.Capabilities.Version] is always over-written with the version
+// that was passed in to the call to [NewMethod].
 func WithCapabilities(capabilities Capabilities) MethodOption {
 	return func(method *Method) error {
 		method.capabilities = capabilities
@@ -40,7 +41,8 @@ func WithCapabilities(capabilities Capabilities) MethodOption {
 	}
 }
 
-// WithHandlerFunction sets the Handler for the Method to the provided function
+// WithHandlerFunction sets the [transport.Method.Handler] to the provided
+// function
 func WithHandlerFunction(function func(*MessageWriter, *Request) error) MethodOption {
 	return func(method *Method) error {
 		method.Handler = HandlerFunc(function)
@@ -56,7 +58,7 @@ func WithStream(stream *Stream) MethodOption {
 	}
 }
 
-// WithHandler sets the Handler for the Method
+// WithHandler sets the [transport.Method.Handler]
 func WithHandler(handler Handler) MethodOption {
 	return func(method *Method) error {
 		method.Handler = handler
@@ -83,14 +85,14 @@ func NewMethod(ctx context.Context, version string, options ...MethodOption) (*M
 }
 
 // SendAndReceive is the Method's main loop, and can be considered equivalent
-// to http.Server's ListenAndServe.
+// to [net/http.Server.ListenAndServe].
 //
 // This function will perform the initial handshake, launch an event queue, and
 // then block on stdin, until it is closed, cannot be read from any longer, or
 // the context is cancelled.
 //
-// NOTE(bruxisma): The use of context.Context is currently barebones, and will
-// most likely improve over time.
+// NOTE(bruxisma): The use of [context.Context] is currently barebones, and
+// will most likely improve over time.
 func (method *Method) SendAndReceive() error {
 	// TODO(bruxisma): Should we create a "root" span here?
 	scanner := NewMessageScanner(os.Stdin)

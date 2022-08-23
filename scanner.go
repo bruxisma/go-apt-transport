@@ -7,9 +7,9 @@ import (
 )
 
 // MessageScanner provides a convenient interface for reading messages from any
-// io.Reader. Successive calls to Scan() will step through the the reader,
+// [io.Reader]. Successive calls to Scan() will step through the the reader,
 // skipping the empty newline between messages. The internal function used to
-// split these messages up is ScanMessages. This internal split function cannot
+// split these messages up is [ScanMessages]. This internal split function cannot
 // be overridden at this time.
 //
 // Scanning stops unrecoverably at EOF, the first I/O error encountered, or
@@ -19,17 +19,17 @@ import (
 // conjunction with ScanMessages.
 //
 // NOTE(bruxisma): It is unlikely that more granular control scanning is
-// required by users, as the input for messages comes from os.Stdin.
-// Additionally, rescanning os.Stdin is out of scope for this library, and
+// required by users, as the input for messages comes from [os.Stdin].
+// Additionally, rescanning [os.Stdin] is out of scope for this library, and
 // indicates that "something wacky" has gone awry with the APT transport method
 // protocol.
 type MessageScanner struct {
 	inner *bufio.Scanner
 }
 
-// NewMessageScanner will initialize a bufio.Scanner internally, call
-// Scanner.Split with ScanMessages and then return. This ensures that the order
-// of operations does not result in a panic when scanning.
+// NewMessageScanner will initialize a [bufio.Scanner] internally, call
+// [bufio.Scanner.Split] with [ScanMessages] and then return. This ensures that
+// the order of operations does not result in a panic when scanning.
 func NewMessageScanner(reader io.Reader) *MessageScanner {
 	scanner := bufio.NewScanner(reader)
 	scanner.Split(ScanMessages)
@@ -40,10 +40,10 @@ func NewMessageScanner(reader io.Reader) *MessageScanner {
 // available through the Message method. It returns false when the scan has
 // stopped, either by reaching the end of the input or an error. After Scan
 // returns false, the Err method will return any error that occurred during
-// scanning, unless it was io.EOF.
+// scanning, unless it was [io.EOF].
 //
 // NOTE(bruxisma): Scan panics if the  split function returns empty slices
-// without advancing the input. This is a side effect of uing bufio.Scanner
+// without advancing the input. This is a side effect of uing [bufio.Scanner]
 // internally.
 func (scanner *MessageScanner) Scan() bool {
 	return scanner.inner.Scan()
@@ -60,7 +60,7 @@ func (scanner *MessageScanner) Err() error {
 // this is done at the cost of an allocation, as the internal bytes buffer is
 // unmarshalled into the returned Message.
 //
-// If Scan has not been called, an error is returned.
+// If [MessageScanner.Scan] has not been called, an error is returned.
 func (scanner *MessageScanner) Message() (*Message, error) {
 	message := &Message{}
 	data := scanner.inner.Bytes()
@@ -77,11 +77,11 @@ func (scanner *MessageScanner) Message() (*Message, error) {
 	return message, nil
 }
 
-// ScanMessages is a SplitFunc function for bufio.Scanner that returns the
+// ScanMessages is a SplitFunc function for [bufio.Scanner] that returns the
 // entire set of data starting with a status code and ending in a double
 // newline.
 //
-// Unlike bufio.ScanLines, this function will error if the last line of input
+// Unlike [bufio.ScanLines], this function will error if the last line of input
 // is not a newline.
 func ScanMessages(data []byte, atEOF bool) (advance int, token []byte, err error) {
 	if atEOF && len(data) == 0 {

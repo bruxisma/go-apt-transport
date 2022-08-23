@@ -32,7 +32,7 @@ const (
 // enforce a carriage return ("\r").
 //
 // A raw Message makes no attempt to validate the StatusCode, Summary, or
-// Fields. This is instead handled by higher level APIs within this library,
+// [Fields]. This is instead handled by higher level APIs within this library,
 // and users are encouraged to use them over raw Messages.
 //
 // Messages can be marshalled to and from Binary data, as they have a
@@ -93,7 +93,7 @@ func StatusText(code int) string {
 	return ""
 }
 
-// todo: support passing in an `error` and converting it to a `Message`
+// todo: support passing in an `error` and converting it to a [Message]
 func MarshalMessage(value any) (*Message, error) {
 	return nil, ErrNotImplemented
 }
@@ -113,7 +113,7 @@ func (message *Message) MarshalBinary() ([]byte, error) {
 	return buffer.Bytes(), nil
 }
 
-// UnmarshalBinary deserializes the receiving byte slice into a Message.
+// UnmarshalBinary deserializes the receiving byte slice into a [Message].
 //
 // This function does not perform any validation on the message's contents,
 // only that it meets the correct layout.
@@ -121,7 +121,8 @@ func (message *Message) MarshalBinary() ([]byte, error) {
 // This means it is possible to receive correctly formatted but ultimately
 // invalid messages.
 //
-// This function is dependent on the behavior of Unmarshaling a Fields object.
+// This function is dependent on the behavior of Unmarshaling a [Fields]
+// object.
 func (message *Message) UnmarshalBinary(data []byte) error {
 	before, after, found := bytes.Cut(data, []byte("\n"))
 	if !found {

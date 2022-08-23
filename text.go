@@ -28,8 +28,8 @@ type Warning string
 // Shortly after sending this, the transport method SHOULD terminate. It is
 // intended to for invalid configuration options or other severe conditions.
 //
-// When using the apt/transport Method.SendAndReceive method, this is
-// automatically sent if the Handler returns an error.
+// When using the [transport.Method.SendAndReceive] method, this is
+// automatically sent if the [transport.Method.Handler] returns an error.
 type GeneralFailure string
 
 func (log Log) MarshalMessage() (*Message, error) {

@@ -9,8 +9,8 @@ import (
 // MessageScanner provides a convenient interface for reading messages from any
 // io.Reader. Successive calls to Scan() will step through the the reader,
 // skipping the empty newline between messages. The internal function used to
-// split these messages up is ScanMessages. This internal split funciton cannot
-// be overriden at this time.
+// split these messages up is ScanMessages. This internal split function cannot
+// be overridden at this time.
 //
 // Scanning stops unrecoverably at EOF, the first I/O error encountered, or
 // when data is too large to fit into the internal buffer. Much like

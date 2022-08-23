@@ -32,7 +32,7 @@ var (
 	timeType = reflect.TypeOf(time.Time{})
 )
 
-// Fields represents the key-value pairs in a Mesage.
+// Fields represents the key-value pairs in a Message.
 //
 // The keys should use a canonical form, as returned by CanonicalFieldKey.
 //
@@ -55,28 +55,28 @@ type FieldUnmarshaler interface {
 
 // Add adds the key, value pair to the fields.
 //
-// It appends to any existing values asociated with key. The key is
+// It appends to any existing values associated with key. The key is
 // case-insensitive; it is canonicalized by CanonicalFieldsKey.
 func (fields Fields) Add(key, value string) {
 	textproto.MIMEHeader(fields).Add(key, value)
 }
 
-// Del deletes  the value asociated  with key. The key is case insensitive. It
+// Del deletes  the value associated  with key. The key is case insensitive. It
 // is canonicalized by CanonicalFieldsKey.
 func (fields Fields) Del(key string) {
 	textproto.MIMEHeader(fields).Del(key)
 }
 
-// Set sets the field entries asociated with key to the single element value.
-// It replaces any  existing values asociated with key. The key is case
+// Set sets the field entries associated with key to the single element value.
+// It replaces any  existing values associated with key. The key is case
 // insensitive. It is canonicalized by CanonicalFieldsKey. To use non-canonical
-// keys, asign to the Fields instance directly.
+// keys, assign to the Fields instance directly.
 func (fields Fields) Set(key, value string) {
 	textproto.MIMEHeader(fields).Set(key, value)
 }
 
-// Get gets the first value asociated with  the given key. If there are no
-// values asociated with the key, Get returns "".
+// Get gets the first value associated with  the given key. If there are no
+// values associated with the key, Get returns "".
 //
 // The key is case insensitive; it is canonicalized by CanonicalFieldsKey. To
 // use non-canonical keys, use the Fields instance directly.
@@ -84,10 +84,10 @@ func (fields Fields) Get(key string) string {
 	return textproto.MIMEHeader(fields).Get(key)
 }
 
-// Values returns all values asociated with the given key.
+// Values returns all values associated with the given key.
 //
 // It is case insensitive; it is canonicalized by CanonicalFieldsKey. To use
-// non-canonical keys, acces the map directly.
+// non-canonical keys, access the map directly.
 //
 // The slice returned is NOT a copy.
 func (fields Fields) Values(key string) []string {
@@ -204,7 +204,7 @@ func GetFieldType(value reflect.Value) FieldType {
 // Header.
 //
 // Some message representations can be represented with a simple string or map,
-// and thus these two types are permited without being passed by pointer.
+// and thus these two types are permitted without being passed by pointer.
 // Slices are never permitted by this function, unless they implement
 // FieldMarshaler.
 //

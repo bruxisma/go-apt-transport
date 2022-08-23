@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-// A Handler respons to a URI Acquire message.
+// A Handler responds to a URI Acquire message.
 type Handler interface {
 	AcquireResource(*MessageWriter, *Request) error
 }
 
 type Request struct {
 	Modified time.Time `transport:"Last-Modified"`
-	Source   *url.URL  `tranport:"URI"`
+	Source   *url.URL  `transport:"URI"`
 	Target   string    `transport:"Filename"`
 }
 

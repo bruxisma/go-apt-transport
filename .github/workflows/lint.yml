@@ -3,13 +3,13 @@ on:
   pull_request:
     types: [synchronize, opened, edited]
 jobs:
-  go.lint:
+  go:
     name: Lint Go
     uses: bruxisma/actions/.github/workflows/go.lint.yml@main
-  yaml.lint:
+  yaml:
     name: Lint YAML
     uses: bruxisma/actions/.github/workflows/yaml.lint.yml@main
-  actions.lint:
+  actions:
     name: Lint GitHub Action Workflows
     uses: bruxisma/actions/.github/workflows/actions.lint.yml@main
   spellcheck:

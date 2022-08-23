@@ -18,7 +18,7 @@ jobs:
     if: needs.skip.outputs.should-skip != 'true'
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
       - name: Setup Go
         uses: actions/setup-go@84cbf8094393cdc5fe1fe1671ff2647332956b1a # tag=v3
         with:
@@ -31,13 +31,13 @@ jobs:
         run: echo "::set-output name=dir::$(go env GOCACHE)"
         id: go-build-cache
       - name: Setup Go Modules Cache
-        uses: actions/cache@v3
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3
         with:
           restore-keys: go-modules-
           path: ${{steps.go-modules-cache.outputs.dir}}
           key: go-modules-${{hashFiles('**/go.sum')}}
       - name: Setup Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3
         with:
           restore-keys: go-build-
           path: ${{steps.go-build-cache.outputs.dir}}

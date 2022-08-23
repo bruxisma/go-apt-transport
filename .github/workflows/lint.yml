@@ -5,7 +5,7 @@ on:
 jobs:
   go.lint:
     name: Lint Go
-    uses: bruxisma/actions/.github/workflows/go.lint.yaml@main
+    uses: bruxisma/actions/.github/workflows/go.lint.yml@main
   yaml.lint:
     name: Lint YAML
     uses: bruxisma/actions/.github/workflows/yaml.lint.yml@main

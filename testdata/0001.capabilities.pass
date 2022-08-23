@@ -1,0 +1,7 @@
+100 Capabilities
+Single-Instance: true
+Needs-Cleanup: true
+Send-URI-Encoded: true
+Removable: false
+Send-Config: true
+

@@ -1,0 +1,24 @@
+name: Lint
+on:
+  pull_request:
+    types: [synchronize, opened, edited]
+jobs:
+  go.lint:
+    name: Lint Go
+    uses: bruxisma/actions/.github/workflows/go.lint.yaml@main
+  yaml.lint:
+    name: Lint YAML
+    uses: bruxisma/actions/.github/workflows/yaml.lint.yml@main
+  actions.lint:
+    name: Lint GitHub Action Workflows
+    uses: bruxisma/actions/.github/workflows/actions.lint.yml@main
+  spellcheck:
+    name: Spellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Checking Spelling
+        uses: crate-ci/typos@v1
+        with:
+          config: ${{github.workspace}}/.github/settings/typos.toml

@@ -97,7 +97,7 @@ func (fields Fields) Values(key string) []string {
 	return textproto.MIMEHeader(fields).Values(key)
 }
 
-// Write writes the [Fields] as though it were a MIME fields. However, it does
+// Write writes the [Fields] as though it were a [textproto.MIMEHeader]. However, it does
 // not add the trailing newline.
 //
 // This function performs the write all at once, but does allocate internally.
@@ -112,7 +112,7 @@ func (fields Fields) Write(writer io.Writer) error {
 
 // MarshalBinary turns the Fields into the correct binary representation.
 //
-// This is primarily called by Fields.Write.
+// This is primarily called by [Fields.Write].
 //
 // This function will error if the fields is empty or nil.
 func (fields Fields) MarshalBinary() ([]byte, error) {
@@ -199,17 +199,16 @@ func GetFieldType(value reflect.Value) FieldType {
 	return UnknownFieldType
 }
 
-// MarshalFields returns the Fields representation of the value provided.
+// MarshalFields returns the [Fields] representation of the value provided.
 //
 // MarshalFields traverses the value of the provided object recursively. If an
-// encountered value implements the FieldMarshaler interface (and is not nil or
-// empty), MarshalFields calls its MarshalFields method to produce a
-// Header.
+// encountered value implements the [FieldMarshaler] interface (and is not nil
+// or empty), MarshalFields will use it to produce the [Fields] object.
 //
 // Some message representations can be represented with a simple string or map,
 // and thus these two types are permitted without being passed by pointer.
 // Slices are never permitted by this function, unless they implement
-// FieldMarshaler.
+// [FieldMarshaler].
 //
 // The encoding of each field in a struct can be customized by the format
 // string stored under the "transport" key in the struct field's tag. The

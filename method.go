@@ -140,7 +140,7 @@ func (method *Method) handleRequests(ctx context.Context) {
 				//				defer span.End()
 				//				setSpanRequest(span, request)
 				err := method.Handler.AcquireResource(writer, request)
-				if err == nil {
+				if err != nil {
 					return
 				}
 				//				span.SetStatus(codes.Error, err.Error())

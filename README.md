@@ -23,6 +23,16 @@ $ go get occult.work/apt/transport@latest
 
 **NOTE**: There is no `occult.work/apt` package.
 
+# Testing
+
+To run unit tests, simply run `go test ./...`. All mocking, testing data, etc.
+is taken care of. For more "fun" output, users can use
+[`gotestfmt`](https://github.com/haveyoudebuggedit/gotestfmt)
+
+```console
+$ go test -v ./... -json -cover ${PWD} 2>&1 | gotestfmt
+```
+
 [godoc-svg]: https://pkg.go.dev/badge/occult.work/apt/transport.svg
 [godoc-lnk]: https://pkg.go.dev/occult.work/apt/transport
 

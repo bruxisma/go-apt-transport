@@ -38,7 +38,7 @@ func (suite *MarshalFieldsSuite) TestMarshalFields() {
 	suite.Require().Contains(fields, CanonicalFieldsKey("URI"))
 }
 
-func (suite *MarshalFieldsSuite) TextMarshalFieldsWithTime() {
+func (suite *MarshalFieldsSuite) TestMarshalFieldsWithTime() {
 	timestamp := time.Date(1998, 3, 31, 0, 0, 0, 0, time.UTC)
 	fields, err := MarshalFields(generateLastModifiedStruct())
 	suite.Require().NoError(err)
@@ -46,7 +46,7 @@ func (suite *MarshalFieldsSuite) TextMarshalFieldsWithTime() {
 	suite.Require().Equal(fields["Last-Modified"][0], timestamp.Format(time.RFC1123))
 }
 
-func (suite *MarshalFieldsSuite) TextMarshalFieldsWithTimePtr() {
+func (suite *MarshalFieldsSuite) TestMarshalFieldsWithTimePtr() {
 	timestamp := time.Date(1998, 3, 31, 0, 0, 0, 0, time.UTC)
 	fields, err := MarshalFields(generateLastModifiedStruct())
 	suite.Require().NoError(err)

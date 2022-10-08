@@ -13,7 +13,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@268d8c0ca0432bb2cf416faae41297df9d262d7f # tag=v3
         with:
-          go-version: ${{github.workspace}}/go.mod
+          go-version-file: ${{github.workspace}}/go.mod
           cache: true
       - name: Setup gotestfmt
         uses: haveyoudebuggedit/gotestfmt-action@v2

@@ -1,6 +1,7 @@
 package transport
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -81,7 +82,7 @@ func (cfg Configuration) UnmarshalFields(fields Fields) error {
 	for _, value := range values {
 		parts := strings.SplitN(value, "=", 2)
 		if len(parts) != 2 {
-			// TODO(bruxisma): log this, so we can figure out if this ever happens, and then return an error.
+			return fmt.Errorf("%w: received %q", ErrInvalidConfigurationItem, value)
 		}
 		key := strings.TrimSpace(parts[0])
 		cfg[key] = strings.TrimSpace(parts[1])

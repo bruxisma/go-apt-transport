@@ -23,6 +23,8 @@ var (
 	ErrFieldEntryInvalid = errors.New("header field entry is invalid")
 	ErrFieldsEmpty       = errors.New("header fields are empty")
 
+	ErrInvalidConfigurationItem = errors.New("configuration item is invalid")
+
 	ErrEmptyInformationalMessage = errors.New("informational message is empty")
 
 	ErrNotImplemented = errors.New("not implemented")

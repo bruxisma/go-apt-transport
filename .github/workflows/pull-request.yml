@@ -14,48 +14,7 @@ jobs:
         id: skip-check
   test:
     name: Test
-    runs-on: ubuntu-latest
+    uses: .github/workflows/test.yml
+    needs: skip
     if: needs.skip.outputs.should-skip != 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-      - name: Setup Go
-        uses: actions/setup-go@268d8c0ca0432bb2cf416faae41297df9d262d7f # tag=v3
-        with:
-          go-version: '1.x'
-          cache: true
-      - name: Get Go Modules Cache location
-        run: echo "::set-output name=dir::$(go env GOMODCACHE)"
-        id: go-modules-cache
-      - name: Get Go Build Cache Location
-        run: echo "::set-output name=dir::$(go env GOCACHE)"
-        id: go-build-cache
-      - name: Setup Go Modules Cache
-        uses: actions/cache@56461b9eb0f8438fd15c7a9968e3c9ebb18ceff1 # tag=v3
-        with:
-          restore-keys: go-modules-
-          path: ${{steps.go-modules-cache.outputs.dir}}
-          key: go-modules-${{hashFiles('**/go.sum')}}
-      - name: Setup Go Build Cache
-        uses: actions/cache@56461b9eb0f8438fd15c7a9968e3c9ebb18ceff1 # tag=v3
-        with:
-          restore-keys: go-build-
-          path: ${{steps.go-build-cache.outputs.dir}}
-          key: go-modules-${{hashFiles('**/go.mod', '**/go.sum')}}
-      - name: Setup gotestfmt
-        uses: haveyoudebuggedit/gotestfmt-action@v2
-        with:
-          token: ${{github.token}}
-      - name: Run Tests
-        run: >-
-          go test -v ./...
-          -json
-          -coverprofile coverage.out
-          -cover ${{github.workspace}}
-          2>&1 | gotestfmt
-      - name: Upload Code Coverage
-        uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # tag=v3.1.1
-        with:
-          fail_ci_if_error: true
-          directory: ${{github.workspace}}
-          files: coverage.out
+

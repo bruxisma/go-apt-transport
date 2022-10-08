@@ -14,7 +14,7 @@ jobs:
         id: skip-check
   test:
     name: Test
-    uses: .github/workflows/test.yml
+    uses: ./.github/workflows/test.yml
     needs: skip
     if: needs.skip.outputs.should-skip != 'true'
 

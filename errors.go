@@ -39,7 +39,7 @@ type MessageMarshalerError struct {
 }
 
 // FieldMarshalerError is used when performing automatic reflection-based
-// marshalling into a field.
+// marshaling into a field.
 type FieldMarshalerError struct {
 	Type   reflect.Type
 	Err    error

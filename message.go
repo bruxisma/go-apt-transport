@@ -35,7 +35,7 @@ const (
 // [Fields]. This is instead handled by higher level APIs within this library,
 // and users are encouraged to use them over raw Messages.
 //
-// Messages can be marshalled to and from Binary data, as they have a
+// Messages can be marshaled to and from Binary data, as they have a
 // well-formed "wire format".
 type Message struct {
 	StatusCode int    // e.g., 100
@@ -121,7 +121,7 @@ func (message *Message) MarshalBinary() ([]byte, error) {
 // This means it is possible to receive correctly formatted but ultimately
 // invalid messages.
 //
-// This function is dependent on the behavior of Unmarshaling a [Fields]
+// This function is dependent on the behavior of Unmarshalling a [Fields]
 // object.
 func (message *Message) UnmarshalBinary(data []byte) error {
 	before, after, found := bytes.Cut(data, []byte("\n"))

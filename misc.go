@@ -15,7 +15,7 @@ type Redirect struct {
 // downloaded by the acquire system (via another method) and made available for
 // the requesting method.
 //
-// The requestor will get a 600 URI Acquire with the URI it requested and the
+// The requester will get a 600 URI Acquire with the URI it requested and the
 // filename will either be an existing file if the request was a success or if
 // the acquire failed for the some reason the file will not exist.
 type AuxRequest struct {

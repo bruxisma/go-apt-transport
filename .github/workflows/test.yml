@@ -5,6 +5,9 @@ on:
   workflow_call:
 jobs:
   test:
+    permissions:
+      id-token: write
+      checks: read
     name: Test
     runs-on: ubuntu-latest
     steps:
@@ -32,3 +35,4 @@ jobs:
           fail_ci_if_error: true
           directory: ${{github.workspace}}
           files: coverage.out
+          use_oidc: true

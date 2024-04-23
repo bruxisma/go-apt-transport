@@ -10,7 +10,7 @@ the [MIT License](LICENSE.md)
 
 # Git Commit Messages
 
-Git commit messages must utlize [gitm😍ji](https://gitmoji.dev) or the actual
+Git commit messages must utilize [gitm😍ji](https://gitmoji.dev) or the actual
 emoji themselves for each line item. If a line requires more information place
 it in a paragraph directly below the line item (unless the description is for
 the subject line of the commit). Additionally, messages should use markdown, as

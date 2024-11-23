@@ -6,7 +6,7 @@ toolchain go1.23.3
 
 require (
 	github.com/MakeNowJust/heredoc/v2 v2.0.1
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	go.opentelemetry.io/otel v1.32.0
 	go.opentelemetry.io/otel/trace v1.32.0
 )

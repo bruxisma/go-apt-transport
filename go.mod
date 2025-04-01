@@ -2,7 +2,7 @@ module occult.work/apt/transport
 
 go 1.22.0
 
-toolchain go1.24.1
+toolchain go1.24.2
 
 require (
 	github.com/MakeNowJust/heredoc/v2 v2.0.1
